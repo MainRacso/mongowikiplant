@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario Cliente</title>
+  <!-- Enlaces a los archivos CSS de Bootstrap -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: url('https://img.freepik.com/fotos-premium/interior-cafe-moderno-iluminado-sol-plantas-interior-clientes-borrosos-fondo_97843-59233.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #1d1f21;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      /* Asegura que el cuerpo ocupe al menos la altura de la ventana */
+    }
+
+    label {
+      margin-bottom: 0.2rem;
+    }
+
+    .form-control {
+      width: calc(50% - 5px);
+    }
+
+    .input-with-level {
+      width: calc(33.33% - 5px);
+      /* 1/3 del ancho del contenedor en dispositivos medianos */
+      display: flex;
+    }
+
+    .back {
+      background-color: rgba(255, 255, 255, 0.9);
+      padding-left: 10%;
+      padding-top: 2%;
+      border-radius: 5%;
+    }
+
+    .navbar {
+      padding: 8px 16px !important;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .button-custom {
+      background-color: #216923;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      transition: background-color 0.3s ease, transform 0.2s;
+      width: 100%;
+      max-width: 200px;
+    }
+
+    .button-custom:hover {
+      background-color: #45a049;
+      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 768px) {
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      .button-container {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" th:href="@{/administrador/index}">WikiPlant</a>
+    <div class="navbar-title">
+      <h1>Formulario Cliente</h1>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="btn btn-outline-danger my-2 my-sm-0" type="submit" th:href="@{/}">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container my-4">
+    <div class="back mx-auto" style="max-width: 800px;">
+      <h2>Formulario de Registro de Cliente</h2>
+      <div id="successMessage">¡El cliente se ha creado con éxito!</div>
+      <form id="registrationForm" th:action="@{/administrador/cliente/save}" th:object="${cliente}" method="post">
+        <div class="form-row">
+          <div class="form-group col-md-4" style="display: none;">
+            <label for="id">ID:</label>
+            <input th:field="*{id}" type="hidden" class="form-control" id="id" name="id">
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="document">Usuario:</label>
+            <input th:field="*{usuario}" type="text" class="form-control" id="document" name="document" required>
+          </div>
+          <!-- Ejemplo de un campo ajustado -->
+          <div class="col-md-4 mb-3">
+            <label for="password">Contraseña:</label>
+            <input th:field="*{contrasena}" type="password" class="form-control" id="password" name="contrasena"
+              required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <label for="documentType">Tipo de Documento:</label>
+            <select th:field="*{tipoDocumento}" class="form-control" id="documentType" name="documentType" required>
+              <option value="CC">CC</option>
+              <option value="TI">TI</option>
+            </select>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="document">Documento:</label>
+            <input th:field="*{numeroDocumento}" type="text" class="form-control" id="document" name="document"
+              required>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="names">Primer Nombre:</label>
+            <input th:field="*{primerNombre}" type="text" class="form-control" id="name" name="primerNombre" required>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <label for="secondName">Segundo Nombre:</label>
+            <input th:field="*{segundoNombre}" type="text" class="form-control" id="secondName" name="segundoNombre"
+              required>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="names">Primer Apellido:</label>
+            <input th:field="*{primerApellido}" type="text" class="form-control" id="lastNamesS" name="primerApellido"
+              required>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="lastNames">Segundo Apellido:</label>
+            <input th:field="*{segundoApellido}" type="text" class="form-control" id="lastNames" name="lastNames"
+              required>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <label for="email">Correo Electronico:</label>
+            <input th:field="*{correoElectronico}" type="text" class="form-control" id="email" name="email" required>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="phone">Número Telefónico:</label>
+            <input th:field="*{numeroTelefonico}" type="text" class="form-control" id="phone" name="phone" required>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Enviar</button>
+      </form>
+      <div class="button-container mt-4">
+        <button th:onclick="|history.back()|" class="button-custom">Volver a la página anterior</button>
+      </div>
+    </div>
+  </div>
+  <footer class="bg-dark text-light text-center py-3">
+    <div class="container">
+      <p>&copy; 2024 WikiPlant. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+  <!-- jQuery, Popper.js, Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

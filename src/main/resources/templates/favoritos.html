@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <title>Plantas Favoritas</title>
+</head>
+
+<body>
+  <div class="container mt-5">
+    <h2>Plantas Favoritas</h2>
+    <div class="row">
+      <!-- Cards de las plantas favoritas -->
+      <div class="col-md-4 mb-4" th:each="planta : ${plantasFavoritas}">
+        <div class="card">
+          <img th:src="${planta.imagen}" alt="Imagen de la planta" class="card-img-top"
+            style="max-height: 200px; object-fit: cover;">
+          <div class="card-body text-center">
+            <h5 class="card-title" th:text="${planta.nomComun}"></h5>
+            <p class="card-text text-muted" th:text="${planta.nomCientifico}"></p>
+            <a th:href="@{/cliente/plantaDetalle(plantaId=${planta.id})}" class="btn btn-primary">Ver Detalles</a>
+
+            <!-- Botón para eliminar de favoritos -->
+            <form th:action="@{/cliente/eliminarDeFavoritos}" method="post" class="mt-2">
+              <input type="hidden" name="plantaId" th:value="${planta.id}" />
+              <button type="submit" class="btn btn-danger">Eliminar de Favoritos</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a href="/cliente/index" class="btn btn-secondary mt-3">Regresar</a>
+  </div>
+</body>
+
+</html>

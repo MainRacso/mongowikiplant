@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contáctenos</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link type="image/png" sizes="32x32" rel="icon" href="https://cdn-icons-png.flaticon.com/128/628/628324.png">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    /* Estilos generales del cuerpo */
+    body {
+      background-color: aliceblue;
+      font-family: "Poppins", sans-serif;
+      color: #333;
+      min-height: 100vh;
+      /* Hace que el body ocupe al menos el tamaño completo de la pantalla */
+      display: flex;
+      /* Usamos flexbox */
+      flex-direction: column;
+      /* Colocamos los elementos en una columna */
+      margin: 0;
+      /* Quitamos márgenes por defecto */
+    }
+
+    /* Estilo de la cabecera */
+    header {
+      background-color: #388e3c;
+      /* Verde oscuro */
+      color: #fff;
+      padding: 4rem 0;
+      /* Espacio más grande */
+      text-align: center;
+    }
+
+    header .navbar-brand img {
+      max-width: 60%;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    /* Barra de navegación */
+    .nav-container {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    nav {
+      background-color: #ffebee;
+      /* Rosa claro */
+      border-bottom: 2px solid #e0e0e0;
+    }
+
+    nav .navbar-nav .nav-item .nav-link {
+      color: #388e3c;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    nav .navbar-nav .nav-item .nav-link:hover {
+      color: #d32f2f;
+      /* Rojo en hover */
+    }
+
+    /* Estilo de los contenedores de contacto */
+    .welcome-container {
+      flex: 1;
+      /* Se expande para ocupar el espacio disponible entre el header y el footer */
+      padding: 3rem 0;
+      background-color: aliceblue;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .welcome-container::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("https://img.freepik.com/foto-gratis/vista-superior-bandeja-turba-planta-showel-rastrillo-escritorio-madera_23-2148044580.jpg?t=st=1730728145~exp=1730731745~hmac=9b1f36d46a6861ca5d9ac23a10c02a65b175079b302c83715715c1835d218fc6&w=996") center/cover fixed no-repeat;
+      opacity: 0.7;
+      z-index: -1;
+    }
+
+    .contact-info {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+    }
+
+    .contact-info h1 {
+      color: #388e3c;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    .contact-info p {
+      font-size: 1.1rem;
+      color: #555;
+    }
+
+    .contact-info a {
+      color: #388e3c;
+      text-decoration: none;
+    }
+
+    .contact-info a:hover {
+      text-decoration: underline;
+    }
+
+    .contact-info ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .contact-info ul li {
+      margin-bottom: 15px;
+      font-size: 1.1rem;
+      color: #555;
+    }
+
+    /* Estilo de las imágenes */
+    .img-fluid {
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    header {
+      position: relative;
+      text-align: center;
+      color: #fff;
+      padding: 6rem 0;
+      background-image: url("https://www.murgiplast.com/wp-content/uploads/2022/10/murgiplast-vivero-1536x1024.jpg.webp");
+      height: 150px;
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    .welcome-container {
+      position: relative;
+      color: #000;
+      padding: 5rem 0;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .welcome-container::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("https://img.freepik.com/foto-gratis/vista-superior-bandeja-turba-planta-showel-rastrillo-escritorio-madera_23-2148044580.jpg?t=st=1730728145~exp=1730731745~hmac=9b1f36d46a6861ca5d9ac23a10c02a65b175079b302c83715715c1835d218fc6&w=996") center/cover fixed no-repeat;
+      opacity: 0.7;
+      z-index: -1;
+    }
+
+    /* Estilos para la barra de navegación */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      transition: background-color 0.5s;
+    }
+
+    .nav-container {
+      position: sticky;
+      background-color: #85b6fb;
+      top: 0;
+      z-index: 3;
+    }
+
+    .navbar-dark .navbar-nav .nav-link {
+      font-weight: bold;
+    }
+
+    nav ul {
+      position: sticky;
+      margin: auto;
+      width: 50%;
+      text-align: center;
+    }
+
+    nav ul li {
+      display: inline-block;
+      width: 24%;
+      line-height: 40%;
+      list-style: none;
+    }
+
+    nav ul li a {
+      display: block;
+      padding: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #85b6fb;
+    }
+
+    /* Estilos para la sección principal */
+    section {
+      position: relative;
+      text-align: center;
+    }
+
+    .section-title {
+      color: #fff;
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .bg-image {
+      position: absolute;
+      height: 100%;
+      width: auto;
+      max-width: 20%;
+      top: 0;
+    }
+
+    .bg-image.left {
+      left: 0;
+    }
+
+    .bg-image.right {
+      right: 0;
+    }
+
+    /* Estilos para las imágenes pequeñas */
+    .img-thumbnail {
+      max-width: 75%;
+      height: auto;
+    }
+
+    /* Estilos para las secciones de productos */
+    .product-section {
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      border-radius: 10px;
+    }
+
+    /* Estilos para las imágenes de productos */
+    .product-image {
+      max-width: 100%;
+      height: auto;
+      border-radius: 5px;
+    }
+
+    /* Estilos para los textos de productos */
+    .product-description {
+      margin-top: 1rem;
+    }
+
+    .btn-outline-success {
+      font-size: 1.2rem;
+      letter-spacing: 1px;
+      margin: 10px;
+      padding: 10px 20px;
+    }
+
+    /* Estilos para el pie de página */
+    footer {
+      background-color: #245325;
+      color: #edf2f7;
+      text-align: center;
+      padding: 1rem 0;
+    }
+
+    footer a {
+      color: #c6f6d5;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: #68d391;
+    }
+
+    /* Estilo para los medios */
+    @media (max-width: 768px) {
+      .contact-info {
+        padding: 20px;
+      }
+
+      .contact-info h1 {
+        font-size: 2rem;
+      }
+
+      .contact-info p {
+        font-size: 1rem;
+      }
+
+      .contact-info ul li {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="bg-darkgreen text-light text-center py-3">
+    <div class="container">
+      <a class="navbar-brand">
+        <img
+          src="https://lh4.googleusercontent.com/proxy/heN60yvGR-WbvVyaBKdAp_uQ3092mUF34lhm2ITvC2HPxA0rqko5RwFifTeT_iBwvi3scg"
+          class="img-fluid" style="max-width: 100%;">
+      </a>
+    </div>
+  </header>
+
+  <div class="nav-container">
+    <nav class="navbar navbar-expand-md navbar-light bg-pink">
+      <div class="container">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" th:href="@{/}"><i class="fas fa-home"></i> Inicio</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/nosotros}"><i class="fas fa-users"></i> Nosotros</a>
+            </li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/servicios}"><i class="fas fa-concierge-bell"></i>
+                Servicios</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/administrador/login}"><i
+                  class="fas fa-user-shield"></i> Admin</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/cliente/login}"><i class="fas fa-user"></i> Cliente</a>
+            </li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/contactenos}"><i class="fas fa-envelope"></i>
+                Contáctenos</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/wikiplant}"><i class="fas fa-envelope"></i>
+                WikiPlant</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Contenedor principal -->
+  <div class="welcome-container">
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="contact-info">
+            <h1 class="text-lg mb-4">Contáctenos</h1>
+            <p class="lead text-lg">Puede contactarnos a través de los siguientes medios:</p>
+            <ul>
+              <li class="lead text-lg">Correo Electrónico:
+                <a href="mailto:gaortega@uts.edu.co">gaortega@uts.edu.co</a><br>
+                <a href="mailto:dvmillan@uts.edu.co">dvmillan@uts.edu.co</a><br>
+                <a href="mailto:dcramos@uts.edu.co">dcramos@uts.edu.co</a>
+              </li>
+              <li class="lead text-lg">WhatsApp:
+                <a href="https://wa.me/573044836511">304 483 6511, </a>
+                <a href="https://wa.me/573222189347">322 218 9347, </a>
+                <a href="https://wa.me/5733227732546">322 773 2546</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-6 text-center">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Rosa_%27Ambiente%27%2C_Bad_W%C3%B6rishofen%2C_Alemania%2C_2019-06-20%2C_DD_25.jpg/800px-Rosa_%27Ambiente%27%2C_Bad_W%C3%B6rishofen%2C_Alemania%2C_2019-06-20%2C_DD_25.jpg"
+            class="img-fluid" alt="Imagen de Contacto">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer fuera del contenedor principal -->
+  <footer class="text-light text-center py-3">
+    <div class="container">
+      <p>&copy; 2024 WikiPlant. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
